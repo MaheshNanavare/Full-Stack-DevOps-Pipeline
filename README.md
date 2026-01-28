@@ -291,6 +291,19 @@ npm test
 - [Kubernetes Documentation](https://kubernetes.io/docs/)
 - [Jenkins Documentation](https://www.jenkins.io/doc/)
 
+## 🔒 Security Considerations
+
+This project is designed for learning and demonstration purposes. For production use, consider:
+
+- **Add Spring Security**: Protect actuator endpoints and implement authentication
+- **Restrict CORS**: Configure specific allowed origins instead of wildcards
+- **Use Secrets Management**: Store sensitive data in Kubernetes Secrets or external vaults
+- **Enable HTTPS/TLS**: Use SSL certificates for secure communication
+- **Image Scanning**: Scan Docker images for vulnerabilities before deployment
+- **Network Policies**: Implement Kubernetes network policies to restrict pod communication
+- **Resource Limits**: Set appropriate CPU and memory limits in production
+- **Regular Updates**: Keep dependencies and base images up to date
+
 ## 🤝 Contributing
 
 1. Fork the repository
