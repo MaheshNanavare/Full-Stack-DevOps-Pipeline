@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: devops-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+      - devops-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  frontend:
+    build: ./frontend
+    container_name: devops-frontend
+    ports:
+      - "3000:80"
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:8080
+    depends_on:
+      - backend
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+    driver: bridge
