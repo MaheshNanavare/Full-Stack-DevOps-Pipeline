@@ -129,17 +129,29 @@ pipeline {
     post {
         success {
             echo 'Pipeline completed successfully!'
-            slackSend(
-                color: 'good',
-                message: "Build ${env.BUILD_NUMBER} succeeded: ${env.JOB_NAME}"
-            )
+            script {
+                try {
+                    slackSend(
+                        color: 'good',
+                        message: "Build ${env.BUILD_NUMBER} succeeded: ${env.JOB_NAME}"
+                    )
+                } catch (Exception e) {
+                    echo "Slack notification failed: ${e.message}"
+                }
+            }
         }
         failure {
             echo 'Pipeline failed!'
-            slackSend(
-                color: 'danger',
-                message: "Build ${env.BUILD_NUMBER} failed: ${env.JOB_NAME}"
-            )
+            script {
+                try {
+                    slackSend(
+                        color: 'danger',
+                        message: "Build ${env.BUILD_NUMBER} failed: ${env.JOB_NAME}"
+                    )
+                } catch (Exception e) {
+                    echo "Slack notification failed: ${e.message}"
+                }
+            }
         }
         always {
             echo 'Cleaning up...'

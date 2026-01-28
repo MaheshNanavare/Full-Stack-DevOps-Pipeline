@@ -3,8 +3,6 @@ kind: Ingress
 metadata:
   name: devops-ingress
   namespace: devops-pipeline
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - host: devops-pipeline.local

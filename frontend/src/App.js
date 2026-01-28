@@ -6,12 +6,12 @@ function App() {
   const [backendInfo, setBackendInfo] = useState({});
   const [error, setError] = useState(null);
 
-  const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
 
   useEffect(() => {
     fetchBackendHealth();
     fetchBackendInfo();
-  }, []);
+  }, [backendUrl]);
 
   const fetchBackendHealth = async () => {
     try {

@@ -10,7 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "${cors.allowed.origins:http://localhost,http://localhost:80,http://localhost:3000}")
 public class HealthController {
 
     @GetMapping("/health")

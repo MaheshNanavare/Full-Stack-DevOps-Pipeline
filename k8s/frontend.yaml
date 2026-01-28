@@ -24,6 +24,18 @@ spec:
         env:
         - name: REACT_APP_BACKEND_URL
           value: "http://backend:8080"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
         resources:
           requests:
             memory: "128Mi"
@@ -38,11 +50,10 @@ metadata:
   name: frontend
   namespace: devops-pipeline
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: frontend
   ports:
   - protocol: TCP
     port: 80
     targetPort: 80
-    nodePort: 30080
